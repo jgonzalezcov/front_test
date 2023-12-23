@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:test/src/screens/HomeScreens/home_screen_model.dart';
+import 'package:test/src/screens/AuthScreens/auth_screen_model.dart';
 
 class SignInWidget extends StatefulWidget {
-  final HomeScreenModel model;
+  final AuthScreenModel model;
 
   const SignInWidget({Key? key, required this.model}) : super(key: key);
 

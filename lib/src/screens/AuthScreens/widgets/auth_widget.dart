@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:test/src/screens/HomeScreens/home_screen_model.dart';
+import 'package:test/src/screens/AuthScreens/auth_screen_model.dart';
 
 class AuthWidget extends StatefulWidget {
-  final HomeScreenModel model;
+  final AuthScreenModel model;
 
   const AuthWidget({Key? key, required this.model}) : super(key: key);
 
@@ -12,7 +12,7 @@ class AuthWidget extends StatefulWidget {
 }
 
 class _AuthWidgetState extends State<AuthWidget> {
-  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   @override
@@ -26,12 +26,11 @@ class _AuthWidgetState extends State<AuthWidget> {
             TextField(
               cursorColor: Colors.white,
               style: const TextStyle(
-                fontFamily: 'Schoolbell',
                 color: Colors.white,
-              ), // Color del texto
-              controller: _usernameController,
+              ),
+              controller: _emailController,
               decoration: const InputDecoration(
-                labelText: 'Nombre de usuario',
+                labelText: 'Correo Electrónico',
                 labelStyle: TextStyle(color: Colors.white),
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white),
@@ -60,8 +59,18 @@ class _AuthWidgetState extends State<AuthWidget> {
             ),
             const SizedBox(height: 32.0),
             ElevatedButton(
-              onPressed: () {
-                // Lógica de autenticación aquí
+              onPressed: () async {
+                await widget.model.authenticate(
+                  _emailController.text,
+                  _passwordController.text,
+                );
+
+                if (widget.model.showMessage == 'Autenticación exitosa') {
+                  // Aquí deberías poner el código para navegar a la ruta Home.
+                  Future.delayed(const Duration(milliseconds: 2005), () {
+                    Navigator.pushReplacementNamed(context, '/main');
+                  });
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,

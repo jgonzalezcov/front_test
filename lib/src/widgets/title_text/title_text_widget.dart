@@ -1,63 +1,73 @@
 import 'package:flutter/material.dart';
 
 class TitleTextWidget extends StatelessWidget {
-  const TitleTextWidget({super.key});
-
+  const TitleTextWidget({
+    Key? key,
+    required this.sizeFont,
+    required this.alingText,
+    required this.textIndentation,
+  }) : super(key: key);
+  final double sizeFont;
+  final Alignment alingText;
+  final double textIndentation;
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Align(
+      alignment: alingText,
+      child: Padding(
+        padding: EdgeInsets.only(left: textIndentation),
         child: RichText(
-      text: const TextSpan(
-        style: TextStyle(
-          fontSize: 45.0,
-          fontFamily: 'Fredoka',
-          fontWeight: FontWeight.bold,
-        ),
-        children: <TextSpan>[
-          TextSpan(
-            text: 'S',
-            style: TextStyle(color: Colors.blue), // Color para la letra 'S'
-          ),
-          TextSpan(
-            text: 'm',
-            style: TextStyle(color: Colors.orange), // Color para la letra 'm'
-          ),
-          TextSpan(
-            text: 'a',
-            style: TextStyle(color: Colors.green), // Color para la letra 'a'
-          ),
-          TextSpan(
-            text: 'r',
-            style: TextStyle(color: Colors.red), // Color para la letra 'r'
-          ),
-          TextSpan(
-            text: 't',
-            style: TextStyle(color: Colors.purple), // Color para la letra 't'
-          ),
-          TextSpan(
-            text: ' ',
+          text: TextSpan(
             style: TextStyle(
-                color: Colors.black), // Color para el espacio entre palabras
+              fontSize: sizeFont, // Utiliza sizeFont directamente aquí
+              fontFamily: 'Fredoka',
+              fontWeight: FontWeight.bold,
+            ),
+            children: const <TextSpan>[
+              TextSpan(
+                text: 'S',
+                style: TextStyle(color: Colors.blue),
+              ),
+              TextSpan(
+                text: 'm',
+                style: TextStyle(color: Colors.orange),
+              ),
+              TextSpan(
+                text: 'a',
+                style: TextStyle(color: Colors.green),
+              ),
+              TextSpan(
+                text: 'r',
+                style: TextStyle(color: Colors.red),
+              ),
+              TextSpan(
+                text: 't',
+                style: TextStyle(color: Colors.purple),
+              ),
+              TextSpan(
+                text: ' ',
+                style: TextStyle(color: Colors.black),
+              ),
+              TextSpan(
+                text: 'Q',
+                style: TextStyle(color: Colors.cyan),
+              ),
+              TextSpan(
+                text: 'u',
+                style: TextStyle(color: Colors.deepOrange),
+              ),
+              TextSpan(
+                text: 'i',
+                style: TextStyle(color: Colors.teal),
+              ),
+              TextSpan(
+                text: 'z',
+                style: TextStyle(color: Colors.pink),
+              ),
+            ],
           ),
-          TextSpan(
-            text: 'Q',
-            style: TextStyle(color: Colors.cyan), // Color para la letra 'Q'
-          ),
-          TextSpan(
-            text: 'u',
-            style:
-                TextStyle(color: Colors.deepOrange), // Color para la letra 'u'
-          ),
-          TextSpan(
-            text: 'i',
-            style: TextStyle(color: Colors.teal), // Color para la letra 'i'
-          ),
-          TextSpan(
-            text: 'z',
-            style: TextStyle(color: Colors.pink), // Color para la letra 'z'
-          ),
-        ],
+        ),
       ),
-    ));
+    );
   }
 }

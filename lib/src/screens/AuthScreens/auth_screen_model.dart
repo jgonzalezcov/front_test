@@ -1,8 +1,10 @@
 import 'package:stacked/stacked.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:test/src/database/database.dart';
+import 'package:test/src/providers/token_provider.dart';
 
-class HomeScreenModel extends BaseViewModel {
+class AuthScreenModel extends BaseViewModel {
   bool _showAuthWidget = true;
   bool get showAuthWidget => _showAuthWidget;
   String _showMessage = '';
@@ -52,9 +54,9 @@ class HomeScreenModel extends BaseViewModel {
       final url = Uri.parse('$urlBase/signin');
 
       final Map<String, String> data = {
-        'email': email,
+        'email': email.toLowerCase(),
         'password': password,
-        'name': name,
+        'name': name.toLowerCase(),
       };
 
       final response = await http.post(
@@ -68,8 +70,38 @@ class HomeScreenModel extends BaseViewModel {
         messageFuntion('La cuenta fue creada correctamente');
       } else {
         _showAuthWidget = false;
-        messageFuntion('Error al crear la cuenta');
+        messageFuntion('Error al crear la cuenta: ${response.statusCode}');
       }
+    }
+  }
+
+// Ingreso de usuario
+  Future<void> authenticate(String email, String password) async {
+    final url = Uri.parse(
+        'https://backendtest-production-c7b9.up.railway.app/account/login');
+    final Map<String, String> data = {
+      'email': email.toLowerCase(),
+      'password': password,
+    };
+
+    try {
+      final response = await http.post(
+        url,
+        body: json.encode(data),
+        headers: {'Content-Type': 'application/json'},
+      );
+
+      if (response.statusCode == 200) {
+        _showAuthWidget = true;
+        messageFuntion('Autenticación exitosa');
+        final String token = response.body;
+        await DatabaseHelper().insertOrUpdateToken(token);
+        await TokenProvider().updateDecodedToken(token);
+      } else {
+        messageFuntion('Error de autenticación');
+      }
+    } catch (error) {
+      messageFuntion('Error de conexión: $error');
     }
   }
 }
