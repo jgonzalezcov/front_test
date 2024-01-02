@@ -33,15 +33,11 @@ dependencies:
   flutter_dotenv: ^5.1.0
   provider: ^6.0.5
   audioplayers: ^5.1.0
-  flutter_tts: ^3.8.3 
-  stacked: ^3.4.1+1
+  flutter_tts: ^3.8.3
+  animated_text_kit: ^4.2.1
   carousel_slider: ^4.2.1
   sqflite: ^2.3.0
   intl: ^0.18.1
-  http: ^1.1.0
-  crypto: ^3.0.3
-  flutter_native_splash: ^2.3.6
-  jwt_decoder: ^2.0.1
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -50,8 +46,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -119,8 +113,3 @@ flutter:
     - family: Schoolbell
       fonts:
         - asset: assets/fonts/Schoolbell-Regular.ttf
-flutter_native_splash:
-  color: "#42a5f5"
-  image: assets/imgs/button2.png
-  image_dark: assets/imgs/button2.png
-# ... flutter pub run flutter_native_splash:create  para que se creen los archivos de splashscreen   
